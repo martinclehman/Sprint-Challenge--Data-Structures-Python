@@ -1,3 +1,8 @@
+import sys
+sys.path.append('../binary_search_tree')
+
+from binary_search_tree import BinarySearchTree
+
 import time
 
 start_time = time.time()
@@ -13,10 +18,22 @@ f.close()
 duplicates = []  # Return the list of duplicates in this data structure
 
 # Replace the nested for loops below with your improvements
+##### BELOW CODE RUNS IN O(n^2) ##########################
+# for name_1 in names_1:
+#    for name_2 in names_2:
+#        if name_1 == name_2:
+#            duplicates.append(name_1)
+
+# Put names_1 into tree
+names_1_bst = BinarySearchTree('M') #initialize tree
 for name_1 in names_1:
-    for name_2 in names_2:
-        if name_1 == name_2:
-            duplicates.append(name_1)
+    names_1_bst.insert(name_1)
+
+# Search for each name in tree
+for name_2 in names_2:
+    if names_1_bst.contains(name_2):
+        duplicates.append(name_2)
+
 
 end_time = time.time()
 print (f"{len(duplicates)} duplicates:\n\n{', '.join(duplicates)}\n\n")
